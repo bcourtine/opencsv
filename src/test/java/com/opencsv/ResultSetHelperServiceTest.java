@@ -629,5 +629,24 @@ public class ResultSetHelperServiceTest {
       String[] columnValues = service.getColumnValues(resultSet);
       assertArrayEquals(expectedValues, columnValues);
    }
-   
+
+   @Test
+   public void customNullDefault() throws SQLException, IOException {
+      final String customDefaultValue = "\\N";
+
+      String[] expectedNames = {"Null Column", "Not Null Column"};
+      String[] realValues = {null, "abcdef"};
+      String[] expectedValues = {customDefaultValue, "abcdef"};
+      int[] expectedTypes = {Types.VARCHAR, Types.VARCHAR};
+
+      ResultSetMetaData metaData = MockResultSetMetaDataBuilder.buildMetaData(expectedNames, expectedTypes);
+      ResultSet resultSet = MockResultSetBuilder.buildResultSet(metaData, realValues, expectedTypes);
+
+      ResultSetHelperService service = new ResultSetHelperService();
+      service.setNullDefault(customDefaultValue);
+
+      String[] columnValues = service.getColumnValues(resultSet);
+      assertArrayEquals(expectedValues, columnValues);
+   }
+
 }
