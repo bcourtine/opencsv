@@ -139,7 +139,13 @@ public class CSVWriterBuilder {
     }
 
     private ICSVWriter createCSVParserWriter() {
-        return new CSVParserWriter(writer, parser, lineEnd);
+        final CSVParserWriter icsvWriter = new CSVParserWriter(writer, parser, lineEnd);
+
+        if (resultSetHelper != null) {
+            icsvWriter.setResultService(resultSetHelper);
+        }
+
+        return icsvWriter;
     }
 
     private ICSVWriter createCSVWriter() {
