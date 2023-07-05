@@ -1,6 +1,7 @@
 package com.opencsv;
 
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
+import com.opencsv.util.StringBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -56,11 +57,11 @@ public class RFC4180Parser extends AbstractCSVParser {
     @Override
     protected void convertToCsvValue(String value, boolean applyQuotesToAll, Appendable appendable) throws IOException {
 
-        String testValue = (value == null && !nullFieldIndicator.equals(CSVReaderNullFieldIndicator.NEITHER)) ? "" : value;
-        boolean containsQuoteChar = testValue != null && testValue.contains(getQuotecharAsString());
+        StringBuilder testValue = (value == null && !nullFieldIndicator.equals(CSVReaderNullFieldIndicator.NEITHER)) ? EMPTY_STRINGBUILDER : new StringBuilder(value);
+        boolean containsQuoteChar = testValue.length() > 0 && testValue.indexOf(getQuotecharAsString()) != -1;
         boolean surroundWithQuotes = applyQuotesToAll || isSurroundWithQuotes(value, containsQuoteChar);
 
-        String convertedString = !containsQuoteChar ? testValue : quoteMatcherPattern.matcher(testValue).replaceAll(quoteDoubledAsString);
+        StringBuilder convertedString = !containsQuoteChar ? testValue : StringBuilderUtil.replaceAll(testValue, getQuotecharAsString(), quoteDoubledAsString);
 
         if (surroundWithQuotes) {
             appendable.append(getQuotechar());

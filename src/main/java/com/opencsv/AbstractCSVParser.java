@@ -17,6 +17,12 @@ public abstract class AbstractCSVParser implements ICSVParser {
      * This is needed by the split command in case the separator character is a regex special character.
      */
     protected static final Pattern SPECIAL_REGEX_CHARS = Pattern.compile("[{}()\\[\\].+*?^$\\\\|]");
+
+    /**
+     * Empty StringBuilder
+     */
+    protected static final StringBuilder EMPTY_STRINGBUILDER = new StringBuilder("");
+
     /**
      * This is the character that the CSVParser will treat as the separator.
      */
