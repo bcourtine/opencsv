@@ -16,14 +16,11 @@
 package com.opencsv.bean.mocks;
 
 import com.opencsv.CSVReader;
-import com.opencsv.bean.BeanField;
 import com.opencsv.bean.MappingStrategy;
 import com.opencsv.exceptions.CsvBadConverterException;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.util.Locale;
 
 public class ErrorHeaderMappingStrategy<T> implements MappingStrategy<T> {
     @Override
