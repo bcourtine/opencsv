@@ -1,11 +1,9 @@
 package com.opencsv;
 
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
-import com.opencsv.util.StringBuilderUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,27 +50,6 @@ public class RFC4180Parser extends AbstractCSVParser {
      */
     RFC4180Parser(char quoteChar, char separator, CSVReaderNullFieldIndicator nullFieldIndicator) {
         super(separator, quoteChar, nullFieldIndicator);
-    }
-
-    @Override
-    protected void convertToCsvValue(String value, boolean applyQuotesToAll, Appendable appendable) throws IOException {
-
-        StringBuilder testValue = (value == null && !nullFieldIndicator.equals(CSVReaderNullFieldIndicator.NEITHER)) ? EMPTY_STRINGBUILDER : new StringBuilder(value);
-        boolean containsQuoteChar = testValue.length() > 0 && testValue.indexOf(getQuotecharAsString()) != -1;
-        boolean surroundWithQuotes = applyQuotesToAll || isSurroundWithQuotes(value, containsQuoteChar);
-
-        StringBuilder convertedString = !containsQuoteChar ? testValue : StringBuilderUtil.replaceAll(testValue, getQuotecharAsString(), quoteDoubledAsString);
-
-        if (surroundWithQuotes) {
-            appendable.append(getQuotechar());
-        }
-
-        appendable.append(convertedString);
-
-        if (surroundWithQuotes) {
-            appendable.append(getQuotechar());
-        }
-
     }
 
     @Override

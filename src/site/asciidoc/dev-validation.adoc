@@ -227,11 +227,11 @@ A StringValidator is assigned to a field using the PreAssignmentValidator annota
 Example
 
 [source, java]
-====
+----
     @PreAssignmentValidator(validator = MustMatchRegexExpression.class, paramString = "^[0-9]{3,6}$")
     @CsvBindByName(column = "id")
     private int beanId;
-====
+----
 
 ==== Processors
 
