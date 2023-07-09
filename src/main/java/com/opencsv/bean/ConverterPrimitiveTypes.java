@@ -17,6 +17,7 @@ package com.opencsv.bean;
 
 import com.opencsv.ICSVParser;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.locale.LocaleConvertUtilsBean;
@@ -85,7 +86,7 @@ public class ConverterPrimitiveTypes extends AbstractCsvConverter {
     public ConverterPrimitiveTypes(Class<?> type, String locale, String writeLocale, Locale errorLocale) {
         super(type, locale, writeLocale, errorLocale);
         if(this.locale == null) {
-            readConverter = new ConvertUtilsBean();
+            readConverter = BeanUtilsBean.getInstance().getConvertUtils();
             readConverter.register(true, false, 0);
             readLocaleConverter = null;
         }
@@ -95,7 +96,7 @@ public class ConverterPrimitiveTypes extends AbstractCsvConverter {
             readConverter = null;
         }
         if(this.writeLocale == null) {
-            writeConverter = new ConvertUtilsBean();
+            writeConverter = BeanUtilsBean.getInstance().getConvertUtils();
             writeConverter.register(true, false, 0);
             writeLocaleConverter = null;
         }
