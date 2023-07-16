@@ -20,8 +20,8 @@ Feel free to look at our unit tests if you are having issues with the validators
 
 Here is a crude diagram of csv data showing where the different types of validators and processors are called.
 
-[ditaa,diagram-overview,format=png]
-....
+[ditaa,"diagram-overview"]
+----
                    +-------------+
                    |     CSV     |
                    |   source    |
@@ -109,8 +109,7 @@ Here is a crude diagram of csv data showing where the different types of validat
                  |     User code   |
                  +--------+--------+
 
-
-....
+----
 
 ==== Validators
 
@@ -336,8 +335,8 @@ public class ConvertEmptyOrBlankStringsToDefault implements StringProcessor {
 And an example of its use:
 
 [source,java]
-====
+----
     @PreAssignmentProcessor(processor = ConvertEmptyOrBlankStringsToDefault.class, paramString = "31415926")
     @CsvBindByName(column = "big number", capture = "^[A-Za-z ]*value: (.*)$", format = "value: %s")
     private long bigNumber;
-====
+----
