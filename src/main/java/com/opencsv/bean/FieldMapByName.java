@@ -61,7 +61,7 @@ public class FieldMapByName<T> extends AbstractFieldMap<String, String, RegexToB
      * Returns a list of required headers that were not present in the input.
      * 
      * @param headersPresent An array of all headers present from the input
-     * @return A list of name + field for all of the required headers that were
+     * @return A list of name + field for all the required headers that were
      *   not found
      */
     public List<FieldMapByNameEntry<T>> determineMissingRequiredHeaders(final String[] headersPresent) {
@@ -93,10 +93,10 @@ public class FieldMapByName<T> extends AbstractFieldMap<String, String, RegexToB
         // Repackage what remains
         List<FieldMapByNameEntry<T>> missingRequiredHeaders = new LinkedList<>();
         for(String s : requiredStringList) {
-            missingRequiredHeaders.add(new FieldMapByNameEntry<T>(s, simpleMap.get(s), false));
+            missingRequiredHeaders.add(new FieldMapByNameEntry<>(s, simpleMap.get(s), false));
         }
         for(ComplexFieldMapEntry<String, String, T> r : requiredRegexList) {
-            missingRequiredHeaders.add(new FieldMapByNameEntry<T>(r.getInitializer(), r.getBeanField(), true));
+            missingRequiredHeaders.add(new FieldMapByNameEntry<>(r.getInitializer(), r.getBeanField(), true));
         }
         
         return missingRequiredHeaders;
