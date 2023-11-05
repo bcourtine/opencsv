@@ -7,7 +7,7 @@ at this. But then, opencsv excels at everything. :)
 
 It's unlikely that you will need to concern yourself with exactly how parsing
 works in opencsv, but documentation wouldn't be documentation if it didn't cover
-all of the obscure nooks and crannies. So here we go.
+all the obscure nooks and crannies. So here we go.
 
 Parsers in opencsv implement the interface ICSVParser. You are free to write your
 own, if you feel the need to. opencsv itself provides two parsers, detailed in the
@@ -24,19 +24,19 @@ do, and does it well. If you don't tell opencsv otherwise, it uses this parser.
 
 The advantage of the CSVParser is that it's highly configurable and has the best chance of
 parsing "non-standard" CSV data.  The disadvantage is that while highly configurable it was
-found that there were RFC4180 data that it could not parse.  Thus the RFC4180Parser was created.
+found that there were RFC4180 data that it could not parse.  Thus, the RFC4180Parser was created.
 
 ===== RFC4180Parser
 
 https://www.rfc-editor.org/rfc/rfc4180.txt[RFC4180] defines a standard for
-all of the nitty-gritty questions of just precisely how CSV files are to be
+all the nitty-gritty questions of just precisely how CSV files are to be
 formatted, delimited, and escaped. Since opencsv predates RFC4180 by a few days
 and every effort was made to preserve backwards compatibility, it was necessary
 to write a new parser for full compliance with RFC4180.
 
-The main difference between between the CSVParser and the RFC4180Parser is that the
+The main difference between the CSVParser and the RFC4180Parser is that the
 CSVParser uses an escape character to denote "unprintable" characters while the RFC4180 spec
-takes all characters between the first and last quote as gospel (with the exception of the double quote
+takes all characters between the first and last quote as gospel (except for the double quote
 which is escaped by a double quote).
 
 ==== Reading into an array of strings
