@@ -77,7 +77,7 @@ public class FieldMapByName<T> extends AbstractFieldMap<String, String, RegexToB
 
         // Now remove the ones we found
         for(String h : headersPresent) {
-            if(!requiredStringList.remove(h.toUpperCase())) {
+            if(!requiredStringList.remove(h.toUpperCase().trim())) {
                 final ListIterator<ComplexFieldMapEntry<String, String, T>> requiredRegexListIterator = requiredRegexList.listIterator();
                 boolean found = false;
                 while(!found && requiredRegexListIterator.hasNext()) {
