@@ -810,7 +810,7 @@ public abstract class AbstractMappingStrategy<I, K extends Comparable<K>, C exte
             String writeFormat = annotation.writeFormatEqualsReadFormat()
                     ? readFormat : annotation.writeFormat();
             converter = new ConverterNumber(elementType, locale, writeLocale,
-                    errorLocale, readFormat, writeFormat);
+                    errorLocale, readFormat, writeFormat, annotation.roundingMode());
         }
 
         // or a Currency

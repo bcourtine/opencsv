@@ -31,6 +31,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -410,5 +411,50 @@ public class NumberTest {
                 .write(new NumberMockColumn());
         assertEquals(";\n",
                 w.toString());
+    }
+    
+    /**
+     * Tests writing {@link java.math.BigDecimal}s that need rounding.
+     *
+     * @throws CsvException Never thrown
+     */
+    @Test
+    public void testWriteRoundingMode() throws CsvException {
+        NumberMockRoundingMode b1 = new NumberMockRoundingMode();
+        b1.setRoundUp(BigDecimal.valueOf(5.5));
+        b1.setRoundDown(BigDecimal.valueOf(5.5));
+        b1.setRoundCeiling(BigDecimal.valueOf(5.5));
+        b1.setRoundFloor(BigDecimal.valueOf(5.5));
+        b1.setRoundHalfUp(BigDecimal.valueOf(5.5));
+        b1.setRoundHalfDown(BigDecimal.valueOf(5.5));
+        b1.setRoundHalfEven(BigDecimal.valueOf(5.5));
+        b1.setRoundUnnecessary(BigDecimal.valueOf(5.0));
+        
+        NumberMockRoundingMode b2 = new NumberMockRoundingMode();
+        b2.setRoundUp(BigDecimal.valueOf(5.5));
+        b2.setRoundDown(BigDecimal.valueOf(5.5));
+        b2.setRoundCeiling(BigDecimal.valueOf(5.5));
+        b2.setRoundFloor(BigDecimal.valueOf(5.5));
+        b2.setRoundHalfUp(BigDecimal.valueOf(5.5));
+        b2.setRoundHalfDown(BigDecimal.valueOf(5.5));
+        b2.setRoundHalfEven(BigDecimal.valueOf(5.5));
+        b2.setRoundUnnecessary(BigDecimal.valueOf(5.5));
+        
+        
+        List<NumberMockRoundingMode> beans = Arrays.asList(b1, b2);
+        StringWriter w = new StringWriter();
+        StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<NumberMockRoundingMode>(w)
+                .withApplyQuotesToAll(false)
+                .withThrowExceptions(false)
+                .build();
+        beanToCsv.write(beans);
+        assertEquals("6,5,6,5,6,5,6,5\n", w.toString());
+        
+        List<CsvException> errors = beanToCsv.getCapturedExceptions();
+        assertNotNull(errors);
+        assertEquals(1, errors.size());
+        CsvException e = errors.get(0);
+        assertTrue(e instanceof CsvDataTypeMismatchException);
+        assertTrue(e.getCause() instanceof ArithmeticException);
     }
 }

@@ -16,6 +16,7 @@
 package com.opencsv.bean;
 
 import java.lang.annotation.*;
+import java.math.RoundingMode;
 
 /**
  * This annotation indicates that the destination field is a number that is
@@ -102,4 +103,14 @@ public @interface CsvNumber {
      * @since 5.4
      */
     String[] profiles() default "";
+    
+    /**
+     * The rounding mode for formatting decimals.
+     * The default rounding mode, in keeping with {@link java.text.DecimalFormat}'s
+     * default, is {@link java.math.RoundingMode.HALF_EVEN}.
+     * 
+     * @return The rounding pattern to be used if decimals are formatted
+     * @since 5.9
+     */
+    RoundingMode roundingMode() default RoundingMode.HALF_EVEN;
 }
