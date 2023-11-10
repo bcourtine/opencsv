@@ -18,22 +18,22 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <maven.surefire.version>3.1.0</maven.surefire.version>
+        <maven.surefire.version>3.2.2</maven.surefire.version>
         <maven.site.version>3.12.1</maven.site.version>
-        <jacoco.version>0.8.10</jacoco.version>
-        <maven.javadoc.version>3.5.0</maven.javadoc.version>
-        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <jacoco.version>0.8.11</jacoco.version>
+        <maven.javadoc.version>3.6.2</maven.javadoc.version>
+        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
-        <junit.version>5.9.3</junit.version>
-        <junit.platform.version>1.9.3</junit.platform.version>
+        <junit.version>5.10.1</junit.version>
+        <junit.platform.version>1.10.1</junit.platform.version>
         <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
         <asciidoctorj.version>1.6.2</asciidoctorj.version>  <!-- Newer versions are compiled in Java 11 -->
-        <jruby.version>9.4.2.0</jruby.version>
+        <jruby.version>9.4.5.0</jruby.version>
         <asciidoctorj.diagram.version>1.5.18</asciidoctorj.diagram.version>  <!-- Newer versions are compiled in Java 11 -->
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     </properties>
 
     <licenses>
@@ -320,7 +320,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.codehaus.gmavenplus</groupId>
                                         <artifactId>gmavenplus-plugin</artifactId>
-                                        <versionRange>3.0.0</versionRange>
+                                        <versionRange>3.0.2</versionRange>
                                         <goals>
                                             <goal>addTestSources</goal>
                                             <goal>generateTestStubs</goal>
@@ -351,7 +351,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                     <dependencies>
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
@@ -419,7 +419,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.2</version>
                 <configuration>
                     <testSources>
                         <testSource>
@@ -441,7 +441,7 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy</artifactId>
-                        <version>3.0.17</version>
+                        <version>3.0.19</version>
                         <exclusions>
                             <exclusion>
                                 <artifactId>junit-dep</artifactId>
@@ -500,7 +500,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -622,7 +622,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.5.2</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
     </build>
@@ -670,7 +670,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -741,7 +741,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.4.5</version>
                 <configuration>
                     <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
                 </configuration>
@@ -749,7 +749,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.21.0</version>
+                <version>3.21.2</version>
                 <configuration>
                     <rulesets>
                         <ruleset>pmd-ruleset.xml</ruleset>
@@ -760,7 +760,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <configuration>
                     <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
                     <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
@@ -790,7 +790,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.3.4</version>
+                <version>4.8.1.0</version>
                 <configuration>
                     <excludeFilterFile>spotbugs-suppressions.xml</excludeFilterFile>
                 </configuration>
@@ -806,7 +806,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
             </plugin>
         </plugins>
     </reporting>
