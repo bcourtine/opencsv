@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -52,11 +53,13 @@ public class ConverterNumber extends AbstractCsvConverter {
      * @param errorLocale The locale to use for error messages
      * @param readFormat The string to use for parsing the number.
      * @param writeFormat The string to use for formatting the number.
+     * @param roundingMode The rounding mode used when converting {@link java.math.BigDecimal}s.
      * @throws CsvBadConverterException If the information given to initialize the converter are inconsistent (e.g.
      *   the annotation {@link com.opencsv.bean.CsvNumber} has been applied to a non-{@link java.lang.Number} type.
      * @see com.opencsv.bean.CsvNumber#value()
      */
-    public ConverterNumber(Class<?> type, String locale, String writeLocale, Locale errorLocale, String readFormat, String writeFormat)
+    public ConverterNumber(Class<?> type, String locale, String writeLocale, Locale errorLocale,
+            String readFormat, String writeFormat, RoundingMode roundingMode)
             throws CsvBadConverterException {
         super(type, locale, writeLocale, errorLocale);
 
@@ -74,7 +77,7 @@ public class ConverterNumber extends AbstractCsvConverter {
         }
 
         // Set up the read formatter
-        readFormatter = createDecimalFormat(readFormat, this.locale);
+        readFormatter = createDecimalFormat(readFormat, this.locale, roundingMode);
 
         // Account for BigDecimal and BigInteger, which require special
         // processing
@@ -113,10 +116,10 @@ public class ConverterNumber extends AbstractCsvConverter {
         }
 
         // Set up the write formatter
-        writeFormatter = createDecimalFormat(writeFormat, this.writeLocale);
+        writeFormatter = createDecimalFormat(writeFormat, this.writeLocale, roundingMode);
     }
 
-    private DecimalFormat createDecimalFormat(String format, Locale locale) {
+    private DecimalFormat createDecimalFormat(String format, Locale locale, RoundingMode roundingMode) {
         NumberFormat nf = NumberFormat.getInstance(ObjectUtils.defaultIfNull(locale, Locale.getDefault(Locale.Category.FORMAT)));
         if (!(nf instanceof DecimalFormat)) {
             throw new CsvBadConverterException(
@@ -141,6 +144,8 @@ public class ConverterNumber extends AbstractCsvConverter {
             csve.initCause(e);
             throw csve;
         }
+        
+        formatter.setRoundingMode(roundingMode);
 
         return formatter;
     }
@@ -154,7 +159,7 @@ public class ConverterNumber extends AbstractCsvConverter {
                     n = readFormatter.parse(value);
                 }
             }
-            catch(ParseException e) {
+            catch(ParseException | ArithmeticException e) {
                 CsvDataTypeMismatchException csve = new CsvDataTypeMismatchException(
                         value, type,
                         String.format(ResourceBundle.getBundle(
@@ -176,9 +181,21 @@ public class ConverterNumber extends AbstractCsvConverter {
      */
     // The rest of the Javadoc is inherited.
     @Override
-    public String convertToWrite(Object value) {
+    public String convertToWrite(Object value) throws CsvDataTypeMismatchException {
         synchronized (writeFormatter) {
-            return value != null ? writeFormatter.format(value) : null;
+            try {
+                return value != null ? writeFormatter.format(value) : null;
+            }
+            catch (ArithmeticException e) {
+                CsvDataTypeMismatchException csve = new CsvDataTypeMismatchException(
+                        value, type,
+                        String.format(ResourceBundle.getBundle(
+                                ICSVParser.DEFAULT_BUNDLE_NAME,
+                                errorLocale)
+                                .getString("unparsable.number"), value, writeFormatter.toPattern()));
+                csve.initCause(e);
+                throw csve;
+            }
         }
     }
 }
