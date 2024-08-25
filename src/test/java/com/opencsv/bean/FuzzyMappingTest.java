@@ -71,8 +71,9 @@ public class FuzzyMappingTest {
      */
     @Test
     public void testReadingFuzzyWithAnnotations() {
-        MappingStrategy<FuzzyMock> strategy = new FuzzyMappingStrategyBuilder<FuzzyMock>().build();
-        strategy.setType(FuzzyMock.class);
+        MappingStrategy<FuzzyMock> strategy = new FuzzyMappingStrategyBuilder<FuzzyMock>()
+                .withType(FuzzyMock.class)
+                .build();
         StringReader input = new StringReader(HEADERS + DATA);
         List<FuzzyMock> beans = new CsvToBeanBuilder<FuzzyMock>(input)
                 .withMappingStrategy(strategy)

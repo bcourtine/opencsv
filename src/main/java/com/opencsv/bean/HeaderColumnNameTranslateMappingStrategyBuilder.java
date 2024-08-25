@@ -10,7 +10,8 @@ package com.opencsv.bean;
  * @since 5.5
  * @author Andrew Rucker Jones
  */
-public class HeaderColumnNameTranslateMappingStrategyBuilder<T> {
+public class HeaderColumnNameTranslateMappingStrategyBuilder<T>
+        extends AbstractMappingStrategyBuilder<T, HeaderColumnNameTranslateMappingStrategy<T>> {
 
     private boolean forceCorrectRecordLength = false;
 
@@ -21,8 +22,13 @@ public class HeaderColumnNameTranslateMappingStrategyBuilder<T> {
      * Builds a new mapping strategy for parsing/writing.
      * @return A new mapping strategy using the options selected
      */
+    @Override
     public HeaderColumnNameTranslateMappingStrategy<T> build() {
-        return new HeaderColumnNameTranslateMappingStrategy<>(forceCorrectRecordLength);
+        HeaderColumnNameTranslateMappingStrategy<T> builder = new HeaderColumnNameTranslateMappingStrategy<>(forceCorrectRecordLength);
+        if (type != null) {
+            builder.setType(type);
+        }
+        return builder;
     }
 
     /**

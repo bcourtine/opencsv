@@ -223,8 +223,9 @@ public class AnnotationTest {
     @Test
     public void testGoodDerivedDataByPosition() throws IOException {
         ColumnPositionMappingStrategy<AnnotatedMockBeanFullDerived> stratd =
-                new ColumnPositionMappingStrategyBuilder<AnnotatedMockBeanFullDerived>().build();
-        stratd.setType(AnnotatedMockBeanFullDerived.class);
+                new ColumnPositionMappingStrategyBuilder<AnnotatedMockBeanFullDerived>()
+                        .withType(AnnotatedMockBeanFullDerived.class)
+                        .build();
         FileReader fin = new FileReader("src/test/resources/testinputposderivedgood.csv");
         List<AnnotatedMockBeanFull> beanList = testGoodData(stratd, fin, true);
         AnnotatedMockBeanFullDerived bean = (AnnotatedMockBeanFullDerived) beanList.get(0);
@@ -1220,8 +1221,8 @@ public class AnnotationTest {
         HeaderColumnNameMappingStrategy<AnnotatedMockBeanFull> strat =
                 new HeaderColumnNameMappingStrategyBuilder<AnnotatedMockBeanFull>()
                         .withForceCorrectRecordLength(true)
+                        .withType(AnnotatedMockBeanFull.class)
                         .build();
-        strat.setType(AnnotatedMockBeanFull.class);
         FileReader fin = new FileReader("src/test/resources/testinputfullwrongcolumnnumber.csv");
         List<AnnotatedMockBeanFull> beanList = new CsvToBeanBuilder<AnnotatedMockBeanFull>(fin)
                 .withSeparator(';')
