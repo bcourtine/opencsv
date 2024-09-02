@@ -59,8 +59,9 @@ public class HeaderColumnNameTranslateMappingStrategyTest {
       String s = "n,o,foo\n" +
               "kyle,123456,emp123\n" +
               "jimmy,abcnum,cust09878";
-      HeaderColumnNameTranslateMappingStrategy<MockBean> strat = new HeaderColumnNameTranslateMappingStrategyBuilder<MockBean>().build();
-      strat.setType(MockBean.class);
+      HeaderColumnNameTranslateMappingStrategy<MockBean> strat = new HeaderColumnNameTranslateMappingStrategyBuilder<MockBean>()
+              .withType(MockBean.class)
+              .build();
       Map<String, String> map = new HashMap<>();
       map.put("n", "name");
       map.put("o", "orderNumber");

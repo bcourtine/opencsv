@@ -10,7 +10,8 @@ package com.opencsv.bean;
  * @since 5.5
  * @author Andrew Rucker Jones
  */
-public class ColumnPositionMappingStrategyBuilder<T> {
+public class ColumnPositionMappingStrategyBuilder<T>
+        extends AbstractMappingStrategyBuilder<T, ColumnPositionMappingStrategy<T>> {
 
     /** Default constructor. */
     public ColumnPositionMappingStrategyBuilder() {}
@@ -19,7 +20,12 @@ public class ColumnPositionMappingStrategyBuilder<T> {
      * Builds a new mapping strategy for parsing/writing.
      * @return A new mapping strategy using the options selected
      */
+    @Override
     public ColumnPositionMappingStrategy<T> build() {
-        return new ColumnPositionMappingStrategy<>();
+        ColumnPositionMappingStrategy<T> builder = new ColumnPositionMappingStrategy<>();
+        if (type != null) {
+            builder.setType(type);
+        }
+        return builder;
     }
 }

@@ -10,7 +10,8 @@ package com.opencsv.bean;
  * @since 5.5
  * @author Andrew Rucker Jones
  */
-public class FuzzyMappingStrategyBuilder<T> {
+public class FuzzyMappingStrategyBuilder<T>
+        extends AbstractMappingStrategyBuilder<T, FuzzyMappingStrategy<T>> {
 
     private boolean forceCorrectRecordLength = false;
 
@@ -21,8 +22,13 @@ public class FuzzyMappingStrategyBuilder<T> {
      * Builds a new mapping strategy for parsing/writing.
      * @return A new mapping strategy using the options selected
      */
+    @Override
     public FuzzyMappingStrategy<T> build() {
-        return new FuzzyMappingStrategy<>(forceCorrectRecordLength);
+        FuzzyMappingStrategy<T> builder = new FuzzyMappingStrategy<>(forceCorrectRecordLength);
+        if (type != null) {
+            builder.setType(type);
+        }
+        return builder;
     }
 
     /**
