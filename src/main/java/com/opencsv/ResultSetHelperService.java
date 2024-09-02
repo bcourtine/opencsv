@@ -32,12 +32,13 @@ public class ResultSetHelperService implements ResultSetHelper {
 
    static final String DEFAULT_DATE_FORMAT = "dd-MMM-yyyy";
    static final String DEFAULT_TIMESTAMP_FORMAT = "dd-MMM-yyyy HH:mm:ss";
-   private static final String DEFAULT_VALUE = StringUtils.EMPTY;
+   private static final String NULL_DEFAULT_VALUE = StringUtils.EMPTY;
 
    protected String dateFormat = DEFAULT_DATE_FORMAT;
    protected String dateTimeFormat = DEFAULT_TIMESTAMP_FORMAT;
    protected NumberFormat integerFormat;
    protected NumberFormat floatingPointFormat;
+   protected String nullDefault = NULL_DEFAULT_VALUE;
 
    /**
     * Default constructor.
@@ -79,6 +80,15 @@ public class ResultSetHelperService implements ResultSetHelper {
     */
    public void setFloatingPointFormat(NumberFormat format) {
       this.floatingPointFormat = format;
+   }
+
+   /**
+    * Set a default value that will be used when column value is null.
+    *
+    * @param nullDefault
+    */
+   public void setNullDefault(String nullDefault) {
+      this.nullDefault = nullDefault;
    }
 
    @Override
@@ -161,7 +171,7 @@ public class ResultSetHelperService implements ResultSetHelper {
             value = handleDate(rs, colIndex, dateFormatString);
             break;
          case Types.TIME:
-            value = Objects.toString(rs.getTime(colIndex), DEFAULT_VALUE);
+            value = Objects.toString(rs.getTime(colIndex), nullDefault);
             break;
          case Types.TIMESTAMP:
             value = handleTimestamp(rs.getTimestamp(colIndex), timestampFormatString);
@@ -179,12 +189,12 @@ public class ResultSetHelperService implements ResultSetHelper {
          default:
             // This takes care of Types.BIT, Types.JAVA_OBJECT, and anything
             // unknown.
-            value = Objects.toString(rs.getObject(colIndex), DEFAULT_VALUE);
+            value = Objects.toString(rs.getObject(colIndex), nullDefault);
       }
 
 
       if (rs.wasNull() || value == null) {
-         value = DEFAULT_VALUE;
+         value = nullDefault;
       }
 
       return value;
@@ -194,7 +204,7 @@ public class ResultSetHelperService implements ResultSetHelper {
       if (formatter != null && value != null) {
          return formatter.format(value);
       }
-      return Objects.toString(value, DEFAULT_VALUE);
+      return Objects.toString(value, nullDefault);
    }
 
    /**
@@ -247,7 +257,7 @@ public class ResultSetHelperService implements ResultSetHelper {
     * @throws SQLException
     */
    protected String handleDate(ResultSet rs, int colIndex, String dateFormatString) throws SQLException {
-      String value = DEFAULT_VALUE;
+      String value = nullDefault;
       Date date = rs.getDate(colIndex);
       if (date != null) {
          SimpleDateFormat df = new SimpleDateFormat(dateFormatString);
@@ -266,7 +276,7 @@ public class ResultSetHelperService implements ResultSetHelper {
     * @throws IOException
     */
    protected String handleClob(ResultSet rs, int colIndex) throws SQLException, IOException {
-      String value = DEFAULT_VALUE;
+      String value = nullDefault;
       Clob c = rs.getClob(colIndex);
       if (c != null) {
          TextStringBuilder sb = new TextStringBuilder();
@@ -286,7 +296,7 @@ public class ResultSetHelperService implements ResultSetHelper {
     * @throws IOException
     */
    protected String handleNClob(ResultSet rs, int colIndex) throws SQLException, IOException {
-      String value = DEFAULT_VALUE;
+      String value = nullDefault;
       NClob nc = rs.getNClob(colIndex);
       if (nc != null) {
          TextStringBuilder sb = new TextStringBuilder();
