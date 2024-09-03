@@ -16,10 +16,6 @@ public class ColumnPositionMappingStrategyBuilder<T>
     /** Default constructor. */
     public ColumnPositionMappingStrategyBuilder() {}
 
-    /**
-     * Builds a new mapping strategy for parsing/writing.
-     * @return A new mapping strategy using the options selected
-     */
     @Override
     public ColumnPositionMappingStrategy<T> build() {
         ColumnPositionMappingStrategy<T> builder = new ColumnPositionMappingStrategy<>();

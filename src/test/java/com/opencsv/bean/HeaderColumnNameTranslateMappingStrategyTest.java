@@ -54,7 +54,7 @@ public class HeaderColumnNameTranslateMappingStrategyTest {
    }
 
    @Test
-   @DisplayName("parse the csv file with only a subset of columns and fields.")
+   @DisplayName("parse the csv file with only a subset of columns and fields.  Type set with builder.")
    public void testParseWithSubset() {
       String s = "n,o,foo\n" +
               "kyle,123456,emp123\n" +
@@ -77,6 +77,30 @@ public class HeaderColumnNameTranslateMappingStrategyTest {
       assertEquals("123456", bean.getOrderNumber());
       assertNull(bean.getId());
    }
+
+    @Test
+    @DisplayName("parse the csv file with only a subset of columns and fields.  Type set with setType.")
+    public void testParseWithSubsetSetType() {
+        String s = "n,o,foo\n" +
+                "kyle,123456,emp123\n" +
+                "jimmy,abcnum,cust09878";
+        HeaderColumnNameTranslateMappingStrategy<MockBean> strat = new HeaderColumnNameTranslateMappingStrategyBuilder<MockBean>().build();
+        strat.setType(MockBean.class);
+        Map<String, String> map = new HashMap<>();
+        map.put("n", "name");
+        map.put("o", "orderNumber");
+        strat.setColumnMapping(map);
+
+        CsvToBean<MockBean> csv = new CsvToBeanBuilder<MockBean>(new StringReader(s))
+                .withMappingStrategy(strat).build();
+        List<MockBean> list = csv.parse();
+        assertNotNull(list);
+        assertEquals(2, list.size());
+        MockBean bean = list.get(0);
+        assertEquals("kyle", bean.getName());
+        assertEquals("123456", bean.getOrderNumber());
+        assertNull(bean.getId());
+    }
 
     @Test
     @DisplayName("Show that even if there are column field name matches they will not be populated if not in the name translate map.")

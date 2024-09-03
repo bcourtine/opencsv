@@ -18,10 +18,6 @@ public class HeaderColumnNameMappingStrategyBuilder<T>
     /** Default constructor. */
     public HeaderColumnNameMappingStrategyBuilder() {}
 
-    /**
-     * Builds a new mapping strategy for parsing/writing.
-     * @return A new mapping strategy using the options selected
-     */
     @Override
     public HeaderColumnNameMappingStrategy<T> build() {
         HeaderColumnNameMappingStrategy<T> builder = new HeaderColumnNameMappingStrategy<>(forceCorrectRecordLength);

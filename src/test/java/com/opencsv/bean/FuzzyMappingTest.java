@@ -70,10 +70,35 @@ public class FuzzyMappingTest {
      * </ul></p>
      */
     @Test
-    public void testReadingFuzzyWithAnnotations() {
+    public void testReadingFuzzyWithAnnotationsWithBuilder() {
         MappingStrategy<FuzzyMock> strategy = new FuzzyMappingStrategyBuilder<FuzzyMock>()
                 .withType(FuzzyMock.class)
                 .build();
+        StringReader input = new StringReader(HEADERS + DATA);
+        List<FuzzyMock> beans = new CsvToBeanBuilder<FuzzyMock>(input)
+                .withMappingStrategy(strategy)
+                .build().parse();
+        assertNotNull(beans);
+        assertEquals(1, beans.size());
+        FuzzyMock bean = beans.get(0);
+        testAllButWildlyInexact(bean);
+        assertEquals(WILD_DATA, bean.getWildlyInexactMatch());
+    }
+
+    /**
+     * Tests reading with {@link FuzzyMappingStrategy} and some annotations present.
+     * <p>Also incidentally tests:<ul>
+     * <li>Precedence of explicit annotations (all name-based types)</li>
+     * <li>Exact matches between header names and member variable names</li>
+     * <li>Inexact but close matches between header names and variable names</li>
+     * <li>Wildly inexact matches between header names and variable names</li>
+     * <li>All headers and all member variables consumed in matching</li>
+     * </ul></p>
+     */
+    @Test
+    public void testReadingFuzzyWithAnnotationsWithSetType() {
+        MappingStrategy<FuzzyMock> strategy = new FuzzyMappingStrategyBuilder<FuzzyMock>().build();
+        strategy.setType(FuzzyMock.class);
         StringReader input = new StringReader(HEADERS + DATA);
         List<FuzzyMock> beans = new CsvToBeanBuilder<FuzzyMock>(input)
                 .withMappingStrategy(strategy)

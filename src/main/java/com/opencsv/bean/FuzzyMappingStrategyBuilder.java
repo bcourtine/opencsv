@@ -18,10 +18,6 @@ public class FuzzyMappingStrategyBuilder<T>
     /** Default constructor. */
     public FuzzyMappingStrategyBuilder() {}
 
-    /**
-     * Builds a new mapping strategy for parsing/writing.
-     * @return A new mapping strategy using the options selected
-     */
     @Override
     public FuzzyMappingStrategy<T> build() {
         FuzzyMappingStrategy<T> builder = new FuzzyMappingStrategy<>(forceCorrectRecordLength);

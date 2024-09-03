@@ -22,7 +22,10 @@ import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import com.opencsv.exceptions.*;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -218,14 +221,37 @@ public class AnnotationTest {
      * Tests mapping a subclass with annotations in both subclass and
      * superclass using {@link CsvBindByPosition}.
      *
+     * Type is set by the builder
+     *
      * @throws IOException Never
      */
     @Test
-    public void testGoodDerivedDataByPosition() throws IOException {
+    public void testGoodDerivedDataByPositionTypeWithBuilder() throws IOException {
         ColumnPositionMappingStrategy<AnnotatedMockBeanFullDerived> stratd =
                 new ColumnPositionMappingStrategyBuilder<AnnotatedMockBeanFullDerived>()
                         .withType(AnnotatedMockBeanFullDerived.class)
                         .build();
+        FileReader fin = new FileReader("src/test/resources/testinputposderivedgood.csv");
+        List<AnnotatedMockBeanFull> beanList = testGoodData(stratd, fin, true);
+        AnnotatedMockBeanFullDerived bean = (AnnotatedMockBeanFullDerived) beanList.get(0);
+        assertEquals(7, bean.getIntInSubclass());
+        bean = (AnnotatedMockBeanFullDerived) beanList.get(1);
+        assertEquals(8, bean.getIntInSubclass());
+    }
+
+    /**
+     * Tests mapping a subclass with annotations in both subclass and
+     * superclass using {@link CsvBindByPosition}.
+     * <p>
+     * Type set with setType.
+     *
+     * @throws IOException Never
+     */
+    @Test
+    public void testGoodDerivedDataByPositionTypeWithSet() throws IOException {
+        ColumnPositionMappingStrategy<AnnotatedMockBeanFullDerived> stratd =
+                new ColumnPositionMappingStrategyBuilder<AnnotatedMockBeanFullDerived>().build();
+        stratd.setType(AnnotatedMockBeanFullDerived.class);
         FileReader fin = new FileReader("src/test/resources/testinputposderivedgood.csv");
         List<AnnotatedMockBeanFull> beanList = testGoodData(stratd, fin, true);
         AnnotatedMockBeanFullDerived bean = (AnnotatedMockBeanFullDerived) beanList.get(0);

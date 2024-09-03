@@ -18,10 +18,6 @@ public class HeaderColumnNameTranslateMappingStrategyBuilder<T>
     /** Default constructor. */
     public HeaderColumnNameTranslateMappingStrategyBuilder() {}
 
-    /**
-     * Builds a new mapping strategy for parsing/writing.
-     * @return A new mapping strategy using the options selected
-     */
     @Override
     public HeaderColumnNameTranslateMappingStrategy<T> build() {
         HeaderColumnNameTranslateMappingStrategy<T> builder = new HeaderColumnNameTranslateMappingStrategy<>(forceCorrectRecordLength);
