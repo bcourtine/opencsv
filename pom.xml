@@ -4,7 +4,7 @@
     <groupId>com.opencsv</groupId>
     <artifactId>opencsv</artifactId>
     <packaging>jar</packaging>
-    <version>5.9.1-SNAPSHOT</version>
+    <version>5.10-SNAPSHOT</version>
     <name>opencsv</name>
     <description>A simple library for reading and writing CSV in Java</description>
     <inceptionYear>2005</inceptionYear>
@@ -19,15 +19,15 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <maven.surefire.version>3.2.2</maven.surefire.version>
-        <maven.site.version>3.12.1</maven.site.version>
-        <jacoco.version>0.8.11</jacoco.version>
+        <maven.site.version>3.21.0</maven.site.version>
+        <jacoco.version>0.8.12</jacoco.version>
         <maven.javadoc.version>3.6.2</maven.javadoc.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-        <commons-lang3.version>3.13.0</commons-lang3.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
-        <junit.version>5.10.1</junit.version>
-        <junit.platform.version>1.10.1</junit.platform.version>
+        <junit.version>5.11.4</junit.version>
+        <junit.platform.version>1.11.4</junit.platform.version>
         <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
         <asciidoctorj.version>1.6.2</asciidoctorj.version>  <!-- Newer versions are compiled in Java 11 -->
         <jruby.version>9.4.5.0</jruby.version>
@@ -670,12 +670,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.11.0</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.9.4</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
