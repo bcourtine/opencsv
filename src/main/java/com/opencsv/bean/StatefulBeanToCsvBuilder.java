@@ -185,10 +185,10 @@ public class StatefulBeanToCsvBuilder<T> {
     }
     
     /**
-     * Sets whether or not results must be written in the same order in which
+     * Sets whether results must be written in the same order in which
      * they appear in the list of beans provided as input.
-     * 
-     * @param orderedResults Whether or not the lines written are in the same
+     *
+     * @param orderedResults whether the lines written are in the same
      *   order they appeared in the input
      * @return this
      * @see StatefulBeanToCsv#setOrderedResults(boolean)
