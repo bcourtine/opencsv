@@ -87,8 +87,8 @@ public class CSVWriter extends AbstractCSVWriter {
          appendQuoteCharacterIfNeeded(applyQuotesToAll, appendable, stringContainsSpecialCharacters);
       }
 
-      appendable.append(lineEnd);
-      writer.write(appendable.toString());
+      appendable.append(getLineEnd());
+      getWriter().write(appendable.toString());
    }
 
    private void appendQuoteCharacterIfNeeded(boolean applyQuotesToAll, Appendable appendable, Boolean stringContainsSpecialCharacters) throws IOException {

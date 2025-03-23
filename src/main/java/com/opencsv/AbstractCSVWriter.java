@@ -14,9 +14,9 @@ import java.sql.SQLException;
  */
 public abstract class AbstractCSVWriter implements ICSVWriter {
 
-    protected final Writer writer;
-    protected String lineEnd;
-    protected ResultSetHelper resultService;
+    private final Writer writer;
+    private final String lineEnd;
+    private ResultSetHelper resultService;
     protected volatile IOException exception;
 
     /**
@@ -28,6 +28,24 @@ public abstract class AbstractCSVWriter implements ICSVWriter {
     protected AbstractCSVWriter(Writer writer, String lineEnd) {
         this.writer = writer;
         this.lineEnd = lineEnd;
+    }
+
+    /**
+     * Provides access to the writer used for outputting CSV data.
+     *
+     * @return The {@link Writer} instance used for writing CSV content.
+     */
+    protected final Writer getWriter() {
+        return writer;
+    }
+
+    /**
+     * Retrieves the line ending sequence used when writing CSV data.
+     *
+     * @return The line ending sequence, either "\n" or "\r\n".
+     */
+    protected final String getLineEnd() {
+        return lineEnd;
     }
 
     @Override
