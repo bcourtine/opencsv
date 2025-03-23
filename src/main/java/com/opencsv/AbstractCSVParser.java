@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * The purpose of the AbstractCSVParser is to consolidate the duplicate code amongst the
- * parsers.
+ * An abstract class representing the basic functionality required for parsing CSV files.
+ * Implements the ICSVParser interface and provides common shared behavior for various CSV
+ * parsing implementations.
  */
 public abstract class AbstractCSVParser implements ICSVParser {
     /**
@@ -30,7 +31,7 @@ public abstract class AbstractCSVParser implements ICSVParser {
     /**
      * This is the separator in Stirng form to reduce the number of calls to toString.
      */
-    protected final String separatorAsString;
+    private final String separatorAsString;
     /**
      * This is the character that the CSVParser will treat as the quotation character.
      */
@@ -38,17 +39,27 @@ public abstract class AbstractCSVParser implements ICSVParser {
     /**
      * This is the quotechar in String form to reduce the number of calls to toString.
      */
-    protected final String quotecharAsString;
+    private final String quotecharAsString;
+
+
+    /**
+     * Returns the doubled quote character as a string representation.
+     *
+     * @return The string representation of the doubled quote character.
+     */
+    protected final String getQuoteDoubledAsString() {
+        return quoteDoubledAsString;
+    }
 
     /**
      * This is quotecharAsString+quotecharAsString - used in replaceAll to reduce the number of strings being created.
      */
-    protected final String quoteDoubledAsString;
+    private final String quoteDoubledAsString;
 
     /**
      * pattern created to match quotechars - optimizaion of the String.replaceAll.
      */
-    protected final Pattern quoteMatcherPattern;
+    private final Pattern quoteMatcherPattern;
 
 
     /**
@@ -80,6 +91,16 @@ public abstract class AbstractCSVParser implements ICSVParser {
         this.quoteMatcherPattern = Pattern.compile(quotecharAsString);
 
         this.nullFieldIndicator = nullFieldIndicator;
+    }
+
+
+    /**
+     * Retrieves the compiled {@link Pattern} used for matching quoted elements in a CSV input.
+     *
+     * @return The {@link Pattern} used for identifying quoted elements.
+     */
+    protected final Pattern getQuoteMatcherPattern() {
+        return quoteMatcherPattern;
     }
 
     @Override

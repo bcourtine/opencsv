@@ -59,7 +59,7 @@ public class RFC4180Parser extends AbstractCSVParser {
         boolean containsQuoteChar = testValue != null && testValue.contains(getQuotecharAsString());
         boolean surroundWithQuotes = applyQuotesToAll || isSurroundWithQuotes(value, containsQuoteChar);
 
-        String convertedString = !containsQuoteChar ? testValue : quoteMatcherPattern.matcher(testValue).replaceAll(quoteDoubledAsString);
+        String convertedString = !containsQuoteChar ? testValue : getQuoteMatcherPattern().matcher(testValue).replaceAll(getQuoteDoubledAsString());
 
         if (surroundWithQuotes) {
             builder.append(getQuotechar());
@@ -114,7 +114,7 @@ public class RFC4180Parser extends AbstractCSVParser {
     }
 
     private String[] tokenizeStringIntoArray(String nextLine) {
-        return nextLine.split(separatorAsString, -1);
+        return nextLine.split(getSeparatorAsString(), -1);
     }
 
     private String[] handleEmptySeparators(String[] strings) {
