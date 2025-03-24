@@ -45,7 +45,7 @@ public class CSVParserWriter extends AbstractCSVWriter {
     @Override
     protected void writeNext(String[] nextLine, boolean applyQuotesToAll, Appendable appendable) throws IOException {
         parser.parseToLine(nextLine, applyQuotesToAll, appendable);
-        appendable.append(lineEnd);
-        writer.write(appendable.toString());
+        appendable.append(getLineEnd());
+        getWriter().write(appendable.toString());
     }
 }

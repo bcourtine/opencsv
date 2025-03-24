@@ -57,13 +57,15 @@ import java.util.ResourceBundle;
  * @since 3.9
  */
 public class CsvToBeanBuilder<T> {
-    
-   /** @see CsvToBean#mappingStrategy */
+
+    /**
+     * @see com.opencsv.bean.CsvToBean#mappingStrategy
+     */
    private MappingStrategy<? extends T> mappingStrategy = null;
    
    /**
     * A CSVReader will be built out of this {@link java.io.Reader}.
-    * @see CsvToBean#csvReader
+    * @see com.opencsv.bean.CsvToBean#csvReader
     */
    private final Reader reader;
 
@@ -71,12 +73,12 @@ public class CsvToBeanBuilder<T> {
      * Allow the user to pass in a prebuilt/custom {@link com.opencsv.CSVReader}.
      */
     private final CSVReader csvReader;
-   
-   /** @see CsvToBean#filter */
+
+    /** @see com.opencsv.bean.CsvToBean#filter */
    private CsvToBeanFilter filter = null;
-   
-   /**
-    * @see CsvToBean#throwExceptions
+
+    /**
+     * @see com.opencsv.bean.CsvToBean#setThrowExceptions(boolean)
     */
    private CsvExceptionHandler exceptionHandler = null;
    

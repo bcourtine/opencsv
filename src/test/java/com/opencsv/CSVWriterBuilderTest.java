@@ -144,7 +144,7 @@ public class CSVWriterBuilderTest {
         CSVWriter csvWriter = (CSVWriter) builder
                 .withResultSetHelper(mockHelper)
                 .build();
-        assertSame(mockHelper, csvWriter.resultService);
+        assertSame(mockHelper, csvWriter.resultService());
     }
 
     @Test
@@ -154,6 +154,6 @@ public class CSVWriterBuilderTest {
                 .withParser(mockParser)
                 .withResultSetHelper(mockHelper)
                 .build();
-        assertSame(mockHelper, csvWriter.resultService);
+        assertSame(mockHelper, csvWriter.resultService());
     }
 }

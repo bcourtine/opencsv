@@ -4,7 +4,7 @@
     <groupId>com.opencsv</groupId>
     <artifactId>opencsv</artifactId>
     <packaging>jar</packaging>
-    <version>5.10-SNAPSHOT</version>
+    <version>5.10.1-SNAPSHOT</version>
     <name>opencsv</name>
     <description>A simple library for reading and writing CSV in Java</description>
     <inceptionYear>2005</inceptionYear>
@@ -19,7 +19,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <maven.surefire.version>3.2.2</maven.surefire.version>
-        <maven.site.version>3.21.0</maven.site.version>
+        <maven.site.version>3.12.1
+        </maven.site.version>  <!-- Newer versions changed the directories and does not pick up the current asciidocs -->
         <jacoco.version>0.8.12</jacoco.version>
         <maven.javadoc.version>3.6.2</maven.javadoc.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
