@@ -485,10 +485,28 @@ public class CSVParser extends AbstractCSVParser {
             }
         }
 
+        /**
+         * Determines whether the current output is empty.
+         * <p>
+         * The output is considered empty if the pending substring indices
+         * indicate there is no substring to process (pendingSubstrFrom >= pendingSubstrTo),
+         * and the StringBuilder object (sb) is either null or has a length of zero.
+         *
+         * @return true if the output is empty, false otherwise.
+         */
         public boolean isEmptyOutput() {
             return pendingSubstrFrom >= pendingSubstrTo && (sb == null || sb.length() == 0);
         }
 
+        /**
+         * Clears the current output buffer and resets the indices used to track
+         * substrings of the input.
+         *
+         * Specifically, this method sets the internal StringBuilder's length to zero,
+         * effectively clearing its content. Additionally, it resets the range of
+         * pending substring indices (pendingSubstrFrom and pendingSubstrTo) to the
+         * current position (i) in the input.
+         */
         public void clearOutput() {
             if (sb != null) {
                 sb.setLength(0);
@@ -497,6 +515,12 @@ public class CSVParser extends AbstractCSVParser {
             pendingSubstrFrom = pendingSubstrTo = i;
         }
 
+        /**
+         * Retrieves the current accumulated output as a string without modifying or clearing the underlying buffers or state.
+         *
+         * @return The current output. If no output has been accumulated, returns a substring of the input
+         *         between the indices specified by the internal state or an empty string if no such substring exists.
+         */
         public String peekOutput() {
             if (sb == null || sb.length() == 0) {
                 return input.substring(pendingSubstrFrom, pendingSubstrTo);
@@ -505,6 +529,14 @@ public class CSVParser extends AbstractCSVParser {
             }
         }
 
+        /**
+         * Retrieves the current output and clears it. This method combines the operations of
+         * peeking at the current output and resetting any internal buffers or indexes to prepare
+         * for new content while ensuring the current output is returned.
+         *
+         * @return The current output as a string before it is cleared. If there is no output,
+         *         an empty string is returned.
+         */
         public String takeOutput() {
             final String result = peekOutput();
             clearOutput();
