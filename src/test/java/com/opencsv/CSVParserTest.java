@@ -3,7 +3,6 @@ package com.opencsv;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import com.opencsv.exceptions.CsvMultilineLimitBrokenException;
 import com.opencsv.exceptions.CsvValidationException;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
 
 import java.io.FileReader;
@@ -861,6 +860,15 @@ public class CSVParserTest {
     public void parseToLineApplyQuotesToAllIsTrue() {
         String[] items = {"This", " is", " a", " test."};
         assertEquals("\"This\",\" is\",\" a\",\" test.\"", csvParser.parseToLine(items, true));
+    }
+
+    @Test
+    public void parseToLineUsesCorrectSeparator() {
+        CSVParserBuilder builder = new CSVParserBuilder();
+        ICSVParser parser = builder.withSeparator('.').withQuoteChar('\'').build();
+
+        String[] items = {"This", " is", " a", " test."};
+        assertEquals("This. is. a.' test.'", parser.parseToLine(items, false));
     }
 
     /**

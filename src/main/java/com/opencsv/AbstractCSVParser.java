@@ -15,21 +15,11 @@ import java.util.stream.Stream;
  */
 public abstract class AbstractCSVParser implements ICSVParser {
     /**
-     * This is needed by the split command in case the separator character is a regex special character.
-     */
-    protected static final Pattern SPECIAL_REGEX_CHARS = Pattern.compile("[{}()\\[\\].+*?^$\\\\|]");
-
-    /**
-     * Empty StringBuilder
-     */
-    protected static final StringBuilder EMPTY_STRINGBUILDER = new StringBuilder("");
-
-    /**
      * This is the character that the CSVParser will treat as the separator.
      */
     protected final char separator;
     /**
-     * This is the separator in Stirng form to reduce the number of calls to toString.
+     * This is the separator in String form to reduce the number of calls to toString.
      */
     private final String separatorAsString;
     /**
@@ -83,7 +73,7 @@ public abstract class AbstractCSVParser implements ICSVParser {
      */
     public AbstractCSVParser(char separator, char quotechar, CSVReaderNullFieldIndicator nullFieldIndicator) {
         this.separator = separator;
-        this.separatorAsString = SPECIAL_REGEX_CHARS.matcher(Character.toString(separator)).replaceAll("\\\\$0");
+        this.separatorAsString = Character.toString(separator);
 
         this.quotechar = quotechar;
         this.quotecharAsString = Character.toString(quotechar);

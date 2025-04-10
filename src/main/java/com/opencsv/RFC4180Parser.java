@@ -48,7 +48,7 @@ public class RFC4180Parser extends AbstractCSVParser {
      * @param quoteChar The character to use for quoted elements
      * @param nullFieldIndicator Indicate what should be considered null
      */
-    RFC4180Parser(char quoteChar, char separator, CSVReaderNullFieldIndicator nullFieldIndicator) {
+    protected RFC4180Parser(char quoteChar, char separator, CSVReaderNullFieldIndicator nullFieldIndicator) {
         super(separator, quoteChar, nullFieldIndicator);
     }
 
@@ -114,7 +114,7 @@ public class RFC4180Parser extends AbstractCSVParser {
     }
 
     private String[] tokenizeStringIntoArray(String nextLine) {
-        return nextLine.split(getSeparatorAsString(), -1);
+        return StringUtils.splitPreserveAllTokens(nextLine, separator);
     }
 
     private String[] handleEmptySeparators(String[] strings) {
@@ -210,7 +210,7 @@ public class RFC4180Parser extends AbstractCSVParser {
             ret = StringUtils.removeStart(ret, getQuotecharAsString());
             ret = StringUtils.removeEnd(ret, getQuotecharAsString());
         }
-        ret = StringUtils.replace(ret, getQuotecharAsString() + getQuotecharAsString(), getQuotecharAsString());
+        ret = StringUtils.replace(ret, getQuoteDoubledAsString(), getQuotecharAsString());
         if (ret.isEmpty() && (nullFieldIndicator == CSVReaderNullFieldIndicator.BOTH || nullFieldIndicator == CSVReaderNullFieldIndicator.EMPTY_QUOTES)) {
             ret = null;
         }
