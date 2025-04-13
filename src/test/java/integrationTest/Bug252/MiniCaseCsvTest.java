@@ -21,7 +21,7 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MiniCaseCsv {
+class MiniCaseCsvTest {
 
     @Test
     void testExportByName() {
