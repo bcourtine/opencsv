@@ -36,7 +36,7 @@ the bean fields with the opencsv annotations, then do this:
 [source, java]
 ----
      List<MyBean> beans = new CsvToBeanBuilder(FileReader("yourfile.csv"))
-       .withType(Visitors.class).build().parse();
+       .withType(MyBean.class).build().parse();
 ----
 
 For writing, create a bean to harbor the information you want to write, annotate
