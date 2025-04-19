@@ -5,13 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileReader;
 import java.io.StringReader;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AllowSpacesForRequiredFieldsHeaders {
+public class AllowSpacesForRequiredFieldsHeadersTest {
     public StringBuilder fileString;
 
     @BeforeEach

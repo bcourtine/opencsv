@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="https://sourceforge.net/p/opencsv/bugs/158/">sourceforge Bug #158</a>
  * @see <a href="https://stackoverflow.com/questions/42856200/opencsv-csvreadernullfieldindicator-seems-to-make-no-difference">stack overflow question</a>
  */
-public class CsvToBeanShouldUseNullFieldIndicatorForStrings {
+public class CsvToBeanShouldUseNullFieldIndicatorForStringsTest {
 
     private static final String CSVDATA = "Id,OwnerId,Name,BillingStreet,BillingCity,BillingState,BillingPostalCode,BillingCountry\n" +
             "some Id, some owner Id, a name,,\"\", ,\" \",";
