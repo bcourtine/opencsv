@@ -534,11 +534,26 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>project</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
+                <!--                <configuration>-->
+                <!--                    <descriptorRefs>-->
+                <!--                        <descriptorRef>project</descriptorRef>-->
+                <!--                    </descriptorRefs>-->
+                <!--                </configuration>-->
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!--
                    gpg is required for Sonatype's publishing mechanism to central

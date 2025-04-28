@@ -37,7 +37,8 @@ import java.util.ResourceBundle;
  * <p>The CSVParser has grown organically based on user requests and does not truly match
  * any current requirements (though it can be configured to match or come close).  There
  * are no plans to change this as it will break existing requirements.  Consider using
- * the RFC4180Parser for less configurability but closer match to the RFC4180 requirements.</p>
+ * the RFC4180Parser for all standard csv data.   It may be less configurable, but that is not
+ * needed for data matching the RFC4180 requirements.</p>
  *
  * @author Glen Smith
  * @author Rainer Pruy

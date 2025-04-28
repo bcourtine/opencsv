@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * This Parser is meant to parse according to the RFC4180 specification.
+ * This Parser is meant to parse csv data according to the RFC4180 specification.
  * <p>Since it shares the same interface with the CSVParser there are methods here that will do nothing.
- * For example the RFC4180 specification does not have an concept of an escape character so the getEscape method
+ * For example, the RFC4180 specification does not have a concept of an escape character, so the getEscape method
  * will return char 0.  The methods that are not supported are noted in the Javadocs.</p>
- * <p>Another departure from the CSVParser is that there is only two constructors and only one is available publicly.
+ * <p>Another departure from the CSVParser is that there are only two constructors and only one is available publicly.
  * The intent is that if you want to create anything other than a default RFC4180Parser you should use the
  * CSVParserBuilder.  This way the code will not become cluttered with constructors as the CSVParser did.</p>
  * <p>You can view the RFC4180 specification at <a href="https://tools.ietf.org/html/rfc4180">the Internet Engineering
