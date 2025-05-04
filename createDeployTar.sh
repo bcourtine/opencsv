@@ -45,7 +45,7 @@ fi
 echo "Extracted version: $version"
 
 # --- Define Paths ---
-TARGET_SUBDIR="com/opencsv/$version"
+TARGET_SUBDIR="com/opencsv/opencsv/$version"
 TAR_FILENAME="${PREFIX}${version}.tar"
 FILE_PATTERN="${PREFIX}${version}*" # Pattern to match all files for this version
 
