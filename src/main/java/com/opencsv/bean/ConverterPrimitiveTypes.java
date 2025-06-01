@@ -87,10 +87,8 @@ public class ConverterPrimitiveTypes extends AbstractCsvConverter {
         super(type, locale, writeLocale, errorLocale);
         if(this.locale == null) {
             readConverter = BeanUtilsBean.getInstance().getConvertUtils();
+            readConverter.register(true, false, 0);
             readLocaleConverter = null;
-            if (readConverter.lookup(type) == null) {
-                readConverter.register(true, false, 0);
-            }
         }
         else {
             readLocaleConverter = new LocaleConvertUtilsBean();
@@ -99,10 +97,8 @@ public class ConverterPrimitiveTypes extends AbstractCsvConverter {
         }
         if(this.writeLocale == null) {
             writeConverter = BeanUtilsBean.getInstance().getConvertUtils();
+            writeConverter.register(true, false, 0);
             writeLocaleConverter = null;
-            if (writeConverter.lookup(type) == null) {
-                writeConverter.register(true, false, 0);
-            }
         }
         else {
             writeLocaleConverter = new LocaleConvertUtilsBean();
