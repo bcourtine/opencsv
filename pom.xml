@@ -4,7 +4,7 @@
     <groupId>com.opencsv</groupId>
     <artifactId>opencsv</artifactId>
     <packaging>jar</packaging>
-    <version>5.11.1-SNAPSHOT</version>
+    <version>5.11.1</version>
     <name>opencsv</name>
     <description>A simple library for reading and writing CSV in Java</description>
     <inceptionYear>2005</inceptionYear>
@@ -25,7 +25,7 @@
         <maven.javadoc.version>3.6.2</maven.javadoc.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
-        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-collections4.version>4.5.0</commons-collections4.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
         <junit.version>5.11.4</junit.version>
         <junit.platform.version>1.11.4</junit.platform.version>
@@ -262,7 +262,6 @@
                                 <groupId>org.junit.vintage</groupId>
                                 <artifactId>junit-vintage-engine</artifactId>
                                 <version>${junit.version}</version>
-                                <scope>runtime</scope>
                             </dependency>
                         </dependencies>
                     </plugin>
@@ -293,7 +292,6 @@
                                 <groupId>org.junit.vintage</groupId>
                                 <artifactId>junit-vintage-engine</artifactId>
                                 <version>${junit.version}</version>
-                                <scope>runtime</scope>
                             </dependency>
                         </dependencies>
                     </plugin>
@@ -442,7 +440,7 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy</artifactId>
-                        <version>3.0.19</version>
+                        <version>3.0.25</version>
                         <exclusions>
                             <exclusion>
                                 <artifactId>junit-dep</artifactId>
@@ -494,7 +492,6 @@
                         <groupId>org.junit.vintage</groupId>
                         <artifactId>junit-vintage-engine</artifactId>
                         <version>${junit.version}</version>
-                        <scope>runtime</scope>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -658,7 +655,7 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
-                <version>2.2</version>
+                <version>3.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -671,12 +668,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.1</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -717,7 +714,6 @@
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
